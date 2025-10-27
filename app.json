@@ -1,38 +1,30 @@
 {
-	"expo": {
-		"name": "iflab-mobile",
-		"slug": "iflab-mobile",
-		"version": "1.0.0",
-
-		"web": {
-			"bundler": "metro"
-		},
-
-		"experiments": {
-			"tsconfigPaths": true
-		},
-
-		"plugins": [],
-
-		"orientation": "portrait",
-		"icon": "./assets/icon.png",
-
-		"userInterfaceStyle": "light",
-
-		"splash": {
-			"image": "./assets/splash.png",
-			"resizeMode": "contain",
-			"backgroundColor": "#ffffff"
-		},
-		"assetBundlePatterns": ["**/*"],
-		"ios": {
-			"supportsTablet": true
-		},
-		"android": {
-			"adaptiveIcon": {
-				"foregroundImage": "./assets/adaptive-icon.png",
-				"backgroundColor": "#ffffff"
-			}
-		}
-	}
+  "expo": {
+    "name": "iflab-mobile",
+    "slug": "iflab-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
 }
