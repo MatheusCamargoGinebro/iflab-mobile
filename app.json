@@ -5,27 +5,29 @@
 		"scheme": "iflab-mobile",
 		"version": "1.0.0",
 		"orientation": "portrait",
-		"icon": "./assets/icon.png",
+		"icon": "./assets/icons/icon-512-maskable.png",
 		"userInterfaceStyle": "light",
 		"newArchEnabled": true,
 		"splash": {
-			"image": "./assets/splash-icon.png",
+			"image": "./assets/icons/icon-512-maskable.png",
 			"resizeMode": "contain",
-			"backgroundColor": "#ffffff"
+			"backgroundColor": "#26580B"
 		},
 		"ios": {
-			"supportsTablet": true
+			"supportsTablet": true,
+			"icon": "./assets/icons/icon-512-maskable.png"
 		},
 		"android": {
 			"adaptiveIcon": {
-				"foregroundImage": "./assets/adaptive-icon.png",
-				"backgroundColor": "#ffffff"
+				"foregroundImage": "./assets/icons/icon-512-maskable.png",
+				"backgroundColor": "#26580B"
 			},
+			"icon": "./assets/icons/icon-512-maskable.png",
 			"edgeToEdgeEnabled": true,
 			"predictiveBackGestureEnabled": false
 		},
 		"web": {
-			"favicon": "./assets/favicon.png"
+			"favicon": "./assets/icons/icon-512-maskable.png"
 		},
 		"plugins": ["expo-router"]
 	}

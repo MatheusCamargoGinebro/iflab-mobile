@@ -1,14 +1,10 @@
 import "../styles/global.css";
 
+import { Text, View } from "react-native";
 import { Stack } from "expo-router";
 
 export default function Layout() {
-	return (
-		<Stack screenOptions={{}}>
-			<Stack.Screen
-				name="HomeScreen/index"
-				options={{ title: "Home", headerShown: false }}
-			/>
-		</Stack>
-	);
+	<View>
+		<Text>Teste</Text>
+	</View>;
 }
