@@ -6,8 +6,8 @@ import "../styles/global.css";
 
 export default function Layout() {
 	return (
-		<View className="flex-1 items-center justify-center bg-iflab_gray_500">
-			<Text>APP tá rodando, rapazeada</Text>
+		<View className="flex-1 items-center justify-center">
+			<Text>IFLab tá rodando, rapazeada</Text>
 		</View>
 	);
 }

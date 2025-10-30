@@ -4,22 +4,28 @@
 */
 // O====================================================================O \\
 
+const AsyncStorage =
+	require("@react-native-async-storage/async-storage").default;
 const BASE_URL = "https://api-flab-v2-0.vercel.app/";
+
+// O====================================================================O \\
 
 // Interface genérica para o corpo e retorno
 export interface Params<TBody = undefined> {
 	method: "GET" | "POST" | "PUT" | "DELETE";
 	path: string;
 	body?: TBody;
-	token?: string;
 }
+
+// O====================================================================O \\
 
 export async function api_request<TResponse = any, TBody = any>({
 	method,
 	path,
 	body,
-	token,
 }: Params<TBody>): Promise<TResponse> {
+	const token = AsyncStorage.getItem("token");
+
 	try {
 		const response = await fetch(`${BASE_URL}${path}`, {
 			method,
@@ -45,3 +51,5 @@ export async function api_request<TResponse = any, TBody = any>({
 		throw new Error(`Erro de rede: ${message}`);
 	}
 }
+
+// O====================================================================O \\
