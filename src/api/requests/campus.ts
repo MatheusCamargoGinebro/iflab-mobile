@@ -6,12 +6,12 @@ import {
 	register_new_campus_req,
 	register_new_campus_res,
 	get_campus_res,
-} from "./types";
+} from "../interfaces";
 
 // O=========================================================================================================O //
 
 // Função para registrar campus:
-async function register_new_campus(
+export async function register_new_campus(
 	campus_name: string,
 	campus_uf: string
 ): Promise<register_new_campus_res> {
@@ -25,14 +25,11 @@ async function register_new_campus(
 // O=========================================================================================================O //
 
 // Função para ler os campus do bd:
-async function get_campus(): Promise<get_campus_res> {
+export async function get_campus(): Promise<get_campus_res> {
 	return api_request<get_campus_res>({
 		method: "GET",
 		path: "campus/get",
 	});
 }
-
-// Exportando funções:
-export { register_new_campus, get_campus };
 
 // O=========================================================================================================O //

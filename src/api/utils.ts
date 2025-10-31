@@ -4,11 +4,14 @@
 */
 // O====================================================================O \\
 
-const AsyncStorage =
-	require("@react-native-async-storage/async-storage").default;
 const BASE_URL = "https://api-flab-v2-0.vercel.app/";
 
+const AsyncStorage =
+	require("@react-native-async-storage/async-storage").default;
+
 // O====================================================================O \\
+
+// O------------------------------------------------O //
 
 // Interface genérica para o corpo e retorno
 export interface Params<TBody = undefined> {
@@ -16,6 +19,16 @@ export interface Params<TBody = undefined> {
 	path: string;
 	body?: TBody;
 }
+
+// O------------------------------------------------O //
+
+// Saída padrão para funções relacionadas a ações:
+export interface default_res {
+	status: boolean;
+	msg: string;
+}
+
+// O------------------------------------------------O //
 
 // O====================================================================O \\
 

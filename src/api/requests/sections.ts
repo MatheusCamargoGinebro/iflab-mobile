@@ -2,7 +2,7 @@
 
 // Função genérica que entra em contato com a API:
 import { api_request } from "../utils";
-import {} from "./types";
+import {} from "../interfaces/sections";
 
 // O=========================================================================================================O //
 
