@@ -197,7 +197,7 @@ export async function edit_element_administration(
 // Função para  elemento:
 export async function edit_element_molar_mass(
     element_id: number,
-    element_molar_mass: type
+    element_molar_mass: number
 ): Promise<default_res> {
     return api_request<default_res,edit_element_info_req>({
         method: "PUT",
