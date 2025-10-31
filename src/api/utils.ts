@@ -37,14 +37,14 @@ export async function api_request<TResponse = any, TBody = any>({
 	path,
 	body,
 }: Params<TBody>): Promise<TResponse> {
-	const token = AsyncStorage.getItem("token");
+	const token = await AsyncStorage.getItem("token");
 
 	try {
 		const response = await fetch(`${BASE_URL}${path}`, {
 			method,
 			headers: {
 				"Content-Type": "application/json",
-				"x-access-token": token ? token : "",
+				"x-access-token": token || "",
 			},
 			body:
 				method === "GET" || method === "DELETE"
@@ -58,7 +58,13 @@ export async function api_request<TResponse = any, TBody = any>({
 			throw new Error(`Erro na requisição: ${response.status} - ${errorText}`);
 		} */
 
-		return response.json();
+		const data = await response.json();
+
+		if (data.status && path === "users/login") {
+			await AsyncStorage.setItem("token", data.token);
+		}
+
+		return data;
 	} catch (err) {
 		const message = err instanceof Error ? err.message : JSON.stringify(err);
 		throw new Error(`Erro de rede: ${message}`);
