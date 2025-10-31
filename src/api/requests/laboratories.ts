@@ -14,7 +14,7 @@ import {
 
 // O=========================================================================================================O //
 
-// Função para  laboratório:
+// Função para registrar laboratório:
 export async function register_new_laboratory(
 	lab_name: string
 ): Promise<default_res> {
@@ -27,7 +27,7 @@ export async function register_new_laboratory(
 
 // O=========================================================================================================O //
 
-// Função para  laboratório:
+// Função para deletar laboratório:
 export async function delete_laboratory(labId: number) {
 	return api_request<default_res>({
 		method: "DELETE",
@@ -37,7 +37,7 @@ export async function delete_laboratory(labId: number) {
 
 // O=========================================================================================================O //
 
-// Função para  laboratório:
+// Função para listar laboratório de um usuário:
 export async function list_user_laboratories(): Promise<list_user_laboratories_res> {
 	return api_request<list_user_laboratories_res>({
 		method: "GET",
@@ -47,7 +47,7 @@ export async function list_user_laboratories(): Promise<list_user_laboratories_r
 
 // O=========================================================================================================O //
 
-// Função para  laboratório:
+// Função para listar agenda de um laboratório:
 export async function list_laboratory_schedule(
 	labId: number,
 	date: string
@@ -60,7 +60,7 @@ export async function list_laboratory_schedule(
 
 // O=========================================================================================================O //
 
-// Função para  laboratório:
+// Função para ler usuários de um laboratório:
 export async function get_lab_users(labId: number): Promise<get_lab_users_res> {
 	return api_request<get_lab_users_res>({
 		method: "GET",
@@ -70,7 +70,7 @@ export async function get_lab_users(labId: number): Promise<get_lab_users_res> {
 
 // O=========================================================================================================O //
 
-// Função para  laboratório:
+// Função para mudar nível de administração de um usuário de um laboratório:
 export async function change_user_admin_level(
 	lab_id: number,
 	user_id: number,
@@ -85,7 +85,7 @@ export async function change_user_admin_level(
 
 // O=========================================================================================================O //
 
-// Função para  laboratório:
+// Função para adicionar usuário a um laboratório:
 export async function add_user_to_lab(
 	lab_id: number,
 	user_id: number,
@@ -100,7 +100,7 @@ export async function add_user_to_lab(
 
 // O=========================================================================================================O //
 
-// Função para  laboratório:
+// Função para remover usuário de um laboratório:
 export async function remove_user_from_lab(
 	lab_id: number,
 	user_id: number
