@@ -76,7 +76,7 @@ export async function change_user_admin_level(
 	user_id: number,
 	user_admin_level: number
 ): Promise<default_res> {
-	return api_request<default_res>({
+	return api_request<default_res, change_user_admin_level_req>({
 		method: "PUT",
 		path: "labs/admin",
 		body: { lab_id, user_id, user_admin_level },
@@ -91,7 +91,7 @@ export async function add_user_to_lab(
 	user_id: number,
 	user_admin_level: number
 ): Promise<default_res> {
-	return api_request<default_res>({
+	return api_request<default_res, add_user_to_lab_req>({
 		method: "POST",
 		path: "labs/admin",
 		body: { lab_id, user_id, user_admin_level },
@@ -105,7 +105,7 @@ export async function remove_user_from_lab(
 	lab_id: number,
 	user_id: number
 ): Promise<default_res> {
-	return api_request<default_res>({
+	return api_request<default_res, remove_user_from_lab_req>({
 		method: "DELETE",
 		path: "labs/admin",
 		body: { lab_id, user_id },
