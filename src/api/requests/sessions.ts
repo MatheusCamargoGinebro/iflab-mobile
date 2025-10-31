@@ -13,13 +13,13 @@ import {
 // O=========================================================================================================O //
 
 // Função para  sessão:
-export async function create_new_session_req(
+export async function create_new_session(
 	lab_id: number,
 	session_date: string,
 	session_starts_at: string,
 	session_ends_at: string,
-	elements_list?: { element_id: number }[],
-	equipments_list?: { equipment_id: number }[]
+	elements_list: { element_id: number }[],
+	equipments_list: { equipment_id: number }[]
 ): Promise<default_res> {
 	return api_request<default_res, create_new_session_req>({
 		method: "POST",

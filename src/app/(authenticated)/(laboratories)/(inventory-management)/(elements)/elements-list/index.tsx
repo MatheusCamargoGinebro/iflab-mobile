@@ -3,7 +3,7 @@ import { Text, View } from "react-native";
 export default function () {
 	return (
 		<View className="flex-1 gap-2 items-center justify-center">
-			<Text className="text-2xl font-bold text-white">Elements list</Text>
+			<Text className="text-2xl font-bold text-black">Elements list</Text>
 		</View>
 	);
 }
