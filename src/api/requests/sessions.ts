@@ -71,33 +71,42 @@ export async function finish_session(session_id: number): Promise<default_res> {
 // O=========================================================================================================O //
 
 // Função para  sessão:
-export async function list_user_sessions_res(): Promise<> {
-	return api_request<>({
-		method: "",
-		path: "",
-		body: {},
+export async function list_user_sessions(): Promise<list_user_sessions_res> {
+	return api_request<list_user_sessions_res>({
+		method: "GET",
+		path: "sessions/mysessions",
 	});
 }
 
 // O=========================================================================================================O //
 
 // Função para  sessão:
-export async function get_utilization_form_res(): Promise<> {
-	return api_request<>({
-		method: "",
-		path: "",
-		body: {},
+export async function get_utilization_form(
+	session_id: number
+): Promise<get_utilization_form_res> {
+	return api_request<get_utilization_form_res>({
+		method: "GET",
+		path: `sessions/form/${session_id}`,
 	});
 }
 
 // O=========================================================================================================O //
 
 // Função para  sessão:
-export async function save_utilization_form_req(): Promise<> {
-	return api_request<>({
-		method: "",
-		path: "",
-		body: {},
+export async function save_utilization_form(
+	session_id: number,
+	elements_list: {
+		element_id: number;
+		element_quantity: number;
+	}[]
+): Promise<default_res> {
+	return api_request<default_res, save_utilization_form_req>({
+		method: "PUT",
+		path: "sessions/form/set",
+		body: {
+			session_id,
+			elements_list,
+		},
 	});
 }
 
