@@ -26,7 +26,7 @@ export interface delete_element_req {
 export interface list_lab_elements_res {
 	status: boolean;
 	msg: string;
-	elementsList?: {
+	elementsList: {
 		chemicalId: number;
 		name: string;
 		quantity: string;

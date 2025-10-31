@@ -12,16 +12,18 @@ export interface register_equipment_req {
 
 // O------------------------------------------------O //
 
+// Entrada:
 export interface delete_equipment_req {
 	equipment_id: number;
 }
 
 // O------------------------------------------------O //
 
+// Saída:
 export interface list_lab_equipments_res {
 	status: boolean;
 	msg: string;
-	equipmentsList?: {
+	equipmentsList: {
 		equipmentId: number;
 		name: string;
 		description: string;
@@ -35,6 +37,7 @@ export interface list_lab_equipments_res {
 
 // O------------------------------------------------O //
 
+// Saída:
 export interface list_session_equipments_res {
 	status: boolean;
 	msg: string;
@@ -53,6 +56,7 @@ export interface list_session_equipments_res {
 
 // O------------------------------------------------O //
 
+// Saída:
 export interface get_equipment_info_res {
 	status: boolean;
 	msg: string;
@@ -70,6 +74,7 @@ export interface get_equipment_info_res {
 
 // O------------------------------------------------O //
 
+// Entrada:
 export interface edit_equipment_info_req {
 	equipment_id: number;
 	equipment_name?: string;

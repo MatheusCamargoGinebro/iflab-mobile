@@ -11,7 +11,7 @@ export interface register_new_laboratory_req {
 export interface list_user_laboratories_res {
 	status: boolean;
 	msg: string;
-	labsList?: {
+	labsList: {
 		labId: number;
 		labName: string;
 		userLevel: string;
@@ -28,7 +28,7 @@ export interface list_user_laboratories_res {
 export interface list_laboratory_schedule_res {
 	status: boolean;
 	msg: string;
-	scheduleList?: {
+	scheduleList: {
 		startsAt: string;
 		endsAt: string;
 		date: string;

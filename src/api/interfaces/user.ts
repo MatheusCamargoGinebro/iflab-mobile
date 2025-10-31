@@ -72,7 +72,7 @@ export interface edit_user_info_req {
 // Saída:
 export interface get_user_info_res {
 	status: boolean;
-	data?: {
+	data: {
 		user_id: number;
 		user_name: string;
 		user_email: string;

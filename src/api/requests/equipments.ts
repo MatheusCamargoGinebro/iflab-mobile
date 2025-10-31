@@ -64,7 +64,7 @@ export async function list_lab_equipments(
 
 // O=========================================================================================================O //
 
-// Função para  equipamentos:
+// Função para listar equipamentos de uma sessão:
 export async function list_session_equipments(
 	sessionId: number
 ): Promise<list_session_equipments_res> {
@@ -77,7 +77,7 @@ export async function list_session_equipments(
 
 // O=========================================================================================================O //
 
-// Função para  equipamentos:
+// Função para ver informações de um equipamento:
 export async function get_equipment_info(
 	equipmentId: number
 ): Promise<get_equipment_info_res> {
@@ -89,7 +89,7 @@ export async function get_equipment_info(
 
 // O=========================================================================================================O //
 
-// Função para  equipamentos:
+// Função para editar nome do equipamento:
 export async function edit_equipment_name(
 	equipment_id: number,
 	equipment_name: string
@@ -103,7 +103,7 @@ export async function edit_equipment_name(
 
 // O=========================================================================================================O //
 
-// Função para  equipamentos:
+// Função para editar quantidade do equipamento:
 export async function edit_equipment_quantity(
 	equipment_id: number,
 	equipment_quantity: number
@@ -117,7 +117,7 @@ export async function edit_equipment_quantity(
 
 // O=========================================================================================================O //
 
-// Função para  equipamentos:
+// Função para editar qualidade do equipamento:
 export async function edit_equipment_quality(
 	equipment_id: number,
 	equipment_quality: number
@@ -131,7 +131,7 @@ export async function edit_equipment_quality(
 
 // O=========================================================================================================O //
 
-// Função para  equipamentos:
+// Função para editar descrição do equipamento:
 export async function edit_equipment_description(
 	equipment_id: number,
 	equipment_description: string
@@ -145,7 +145,7 @@ export async function edit_equipment_description(
 
 // O=========================================================================================================O //
 
-// Função para  equipamentos:
+// Função para editar admin do equipamento:
 export async function edit_equipment_administration(
 	equipment_id: number,
 	equipment_admin_level: number
@@ -159,7 +159,7 @@ export async function edit_equipment_administration(
 
 // O=========================================================================================================O //
 
-// Função para  equipamentos:
+// Função para editar imagem do equipamento:
 export async function edit_equipment_image(
 	equipment_id: number,
 	equipment_image: string
