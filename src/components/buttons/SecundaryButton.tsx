@@ -19,7 +19,7 @@ export function SecundaryButton({ text, action, disabled = false }: Props) {
 			onPressOut={() => setPressed(false)}
 		>
 			<Text
-				className={` text-xl ${disabled ? " text-iflab-gray-400" : pressed ? "text-iflab-green-200" : "text-iflab-green-100"}`}
+				className={` text-xl ${disabled ? " text-iflab-gray-400 opacity-50" : pressed ? "text-iflab-green-200" : "text-iflab-green-100"}`}
 			>
 				{text}
 			</Text>

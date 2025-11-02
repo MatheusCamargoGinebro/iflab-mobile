@@ -20,7 +20,7 @@ export function PrimaryButton({
 
 	return (
 		<Pressable
-			className={`flex-row items-center justify-center gap-2 rounded-xl px-10 py-4 w-fit h-fit text-center ${destructive ? (disabled ? "bg-iflab-gray-100" : pressed ? "bg-iflab-red-200" : "bg-iflab-red-400") : disabled ? "bg-iflab-gray-100" : pressed ? "bg-iflab-green-200" : "bg-iflab-green-50"}`}
+			className={`flex-row items-center justify-center gap-2 rounded-xl px-10 py-4 w-fit h-fit text-center ${destructive ? (disabled ? "bg-iflab-gray-100 opacity-50" : pressed ? "bg-iflab-red-200" : "bg-iflab-red-400") : disabled ? "bg-iflab-gray-100 opacity-50" : pressed ? "bg-iflab-green-200" : "bg-iflab-green-50"}`}
 			onPress={action}
 			disabled={disabled}
 			onPressIn={() => setPressed(true)}
