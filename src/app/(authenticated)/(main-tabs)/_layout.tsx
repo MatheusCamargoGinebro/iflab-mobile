@@ -2,7 +2,7 @@ import { Tabs } from "expo-router";
 
 export default function Layout() {
 	return (
-		<Tabs screenOptions={{}}>
+		<Tabs screenOptions={{}} initialRouteName="home/index">
 			<Tabs.Screen
 				name="(my-sessions)"
 				options={{ title: "my-sessions", headerShown: false }}

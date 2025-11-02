@@ -2,7 +2,7 @@ import { Stack } from "expo-router";
 
 export default function Layout() {
 	return (
-		<Stack screenOptions={{}}>
+		<Stack screenOptions={{}} initialRouteName="(email-verification)">
 			<Stack.Screen
 				name="(authentication)"
 				options={{ title: "authentication", headerShown: false }}

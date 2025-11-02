@@ -2,7 +2,7 @@ import { Stack } from "expo-router";
 
 export default function Layout() {
 	return (
-		<Stack screenOptions={{}}>
+		<Stack screenOptions={{}} initialRouteName="date/index">
 			<Stack.Screen
 				name="confirm/index"
 				options={{ title: "confirm", headerShown: false }}

@@ -2,7 +2,7 @@ import { Stack } from "expo-router";
 
 export default function Layout() {
 	return (
-		<Stack screenOptions={{}}>
+		<Stack screenOptions={{}} initialRouteName="sessions-list/index">
 			<Stack.Screen
 				name="session-list/index"
 				options={{ title: "session list", headerShown: false }}
