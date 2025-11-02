@@ -1,18 +1,32 @@
 import {
-	TextInput,
 	View,
+	TextInput,
+	Text,
 	Image,
 	ImageSourcePropType,
-	Text,
 	Pressable,
 } from "react-native";
 import { useState } from "react";
+
+type KeyboardType =
+	| "default"
+	| "email-address"
+	| "numeric"
+	| "phone-pad"
+	| "number-pad"
+	| "decimal-pad"
+	| "url"
+	| "ascii-capable"
+	| "twitter"
+	| "web-search"
+	| "visible-password"
+	| "name-phone-pad";
 
 interface Props {
 	value: string;
 	placeholder: string;
 	errorMessage: string;
-	type?: "default" | "email-address" | "numeric" | "visible-password";
+	type?: KeyboardType;
 	icon?: ImageSourcePropType;
 	isValid: boolean;
 	action: (text: string) => void;
@@ -42,51 +56,51 @@ export function UnderlineInput({
 
 			return (
 				<Pressable onPress={togglePasswordVisibility}>
-					<Image
-						source={iconSource}
-						className="w-8 h-8"
-						style={{
-							tintColor:
-								value === "" ? "#555555" : isValid ? "#224411ff" : "#ff1a1a",
-						}}
-					/>
+					<Image source={iconSource} className="w-6 h-6" />
 				</Pressable>
 			);
 		}
-
-		return icon ? (
-			<Image
-				source={icon}
-				className="w-8 h-8"
-				style={{
-					tintColor:
-						value === "" ? "#555555" : isValid ? "#224411ff" : "#ff1a1a",
-				}}
-			/>
-		) : null;
+		return icon ? <Image source={icon} className="w-6 h-6" /> : null;
 	};
-
+    
 	return (
-		<View className="">
+		<View className="mt-6">
 			<View
-				className={`relative flex-row justify-between items-center border-b pl-2 pr-1 ${value === "" ? "border-iflab-gray-600" : isValid ? "border-iflab-green-100" : "border-iflab-red-400"}`}
+				className={`relative border-b px-1 flex-row items-center justify-between ${
+					value === ""
+						? "border-iflab-gray-600"
+						: isValid
+							? "border-iflab-green-100"
+							: "border-iflab-red-400"
+				}`}
 			>
-				<TextInput
-					className="w-11/12"
-					value={value}
-					onChangeText={action}
-					keyboardType={isPassword ? "default" : type}
-					secureTextEntry={isPassword && !showPassword}
-					placeholder={placeholder}
-					autoCapitalize="none"
-				/>
+				<View className="flex-1">
+					<Text
+						className={`z-10 absolute text-iflab-gray-600 transition-all duration-75 ${
+							value === "" ? "top-3 text-base left-2" : "-top-3 -left-1 text-sm"
+						}`}
+					>
+						{placeholder}
+					</Text>
+
+					<TextInput
+						className="text-base"
+						value={value}
+						onChangeText={action}
+						keyboardType={isPassword ? "default" : type}
+						secureTextEntry={isPassword && !showPassword}
+						autoCapitalize="none"
+					/>
+				</View>
 
 				{renderIcon()}
 			</View>
 
 			{!!errorMessage && (
 				<Text
-					className={`text-red-500 text-sm mt-2 ml-1 ${isValid || value === "" ? "opacity-0" : "opacity-100"}`}
+					className={`text-red-500 text-sm mt-2 ml-1 ${
+						isValid || value === "" ? "opacity-0" : "opacity-100"
+					}`}
 				>
 					{errorMessage}
 				</Text>
