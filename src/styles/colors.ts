@@ -25,8 +25,9 @@ export const colors = {
 	transparent: "#00000000",
 
 	// green
-	"iflab-green-50": "#224411ff",
-	"iflab-green-100": "#3b6c22ff",
+	"iflab-green-50": "#3e7522ff",
+	"iflab-green-100": "#3B6C22ff",
+	"iflab-green-200": "#224411ff",
 
 	// red
 	"iflab-red-50": "#ffe5e5",

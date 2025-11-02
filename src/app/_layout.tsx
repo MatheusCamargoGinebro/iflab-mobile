@@ -6,6 +6,17 @@ import { get_user_info, login_user } from "../api/requests";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import LoadingScreen from "./loading";
 
+import {
+	configureReanimatedLogger,
+	ReanimatedLogLevel,
+} from "react-native-reanimated";
+
+// This is the default configuration
+configureReanimatedLogger({
+	level: ReanimatedLogLevel.warn,
+	strict: false, // Reanimated runs in strict mode by default
+});
+
 export default function RootLayout() {
 	const [isLogged, setIslogged] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
