@@ -3,7 +3,6 @@ import { View, Animated, Easing, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { colors } from "../../styles/colors";
 
-// Loader com 9 quadradinhos animados e destaque sequencial (ida e volta)
 function BanterLoader() {
 	const anims = useRef<Animated.Value[]>(
 		Array.from({ length: 9 }, () => new Animated.Value(0))
@@ -151,7 +150,7 @@ interface LoadingProps {
 	status_msg: string;
 }
 
-export function LoadingScreen({ status_msg }: LoadingProps) {
+export default function LoadingScreen({ status_msg }: LoadingProps) {
 	return (
 		<SafeAreaView className="flex-1 bg-white_full justify-center items-center">
 			<View className="justify-center items-center">

@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-
 import { Stack } from "expo-router";
-import { LoadingScreen } from "./loading";
-
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { get_user_info, login_user } from "../api/requests";
-
 import "../styles/global.css";
+
+import { get_user_info, login_user } from "../api/requests";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import LoadingScreen from "./loading";
 
 export default function RootLayout() {
 	const [isLogged, setIslogged] = useState(false);
@@ -14,17 +12,19 @@ export default function RootLayout() {
 
 	useEffect(() => {
 		async function fetch_data() {
-			/* await AsyncStorage.multiRemove([
+			await AsyncStorage.multiRemove([
 				"user_email",
 				"user_password",
 				"token",
 				"remember_login",
-			]); */
+			]);
 			/* await AsyncStorage.setItem("user_email", "daniel.rocha@ifsp.edu.br");
 			await AsyncStorage.setItem("user_password", "M4th3us@12345");
 			await AsyncStorage.setItem("remember_login", "true"); */
 
 			const response = await get_user_info();
+
+			console.log(response);
 
 			if (response.status) {
 				setIslogged(true);
@@ -56,7 +56,15 @@ export default function RootLayout() {
 			setIsLoading(false);
 		}
 
-		fetch_data();
+		fetch_data().then(() =>
+			console.log(
+				"\nisLoading:",
+				isLoading,
+				"\nIslogged:",
+				isLogged,
+				"\n\n\n\n"
+			)
+		);
 	}, []);
 
 	if (isLoading) {
@@ -66,11 +74,18 @@ export default function RootLayout() {
 	return (
 		<Stack>
 			{isLogged ? (
-				<Stack.Screen name="(authenticated)" options={{ headerShown: false }} />
+				<Stack.Screen
+					name="(authenticated)"
+					options={{
+						headerShown: false,
+					}}
+				/>
 			) : (
 				<Stack.Screen
 					name="(unauthenticated)"
-					options={{ headerShown: false }}
+					options={{
+						headerShown: false,
+					}}
 				/>
 			)}
 		</Stack>

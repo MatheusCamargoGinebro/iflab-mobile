@@ -4,12 +4,12 @@ export default function Layout() {
 	return (
 		<Stack screenOptions={{}}>
 			<Stack.Screen
-				name="(elements)"
-				options={{ title: "elements", headerShown: false }}
+				name="forgot-password/index"
+				options={{ title: "forgot password", headerShown: false }}
 			/>
 			<Stack.Screen
-				name="(equipments)"
-				options={{ title: "equipments", headerShown: false }}
+				name="login/index"
+				options={{ title: "login", headerShown: false }}
 			/>
 		</Stack>
 	);
