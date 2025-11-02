@@ -1,12 +1,15 @@
 import { Text, View } from "react-native";
 import {
+	CheckBox,
 	PrimaryButton,
 	SecundaryButton,
 } from "../../../../components/buttons/";
+import { useState } from "react";
 
 const delete_Item = require("../../../../../assets/UI/delete.png");
 
 export default function () {
+	const [rememberPassword, setRememberPassword] = useState(false);
 	return (
 		<View className="flex-1 gap-2 items-center justify-center">
 			<Text className="text-2xl font-bold text-black">Login</Text>
@@ -24,6 +27,11 @@ export default function () {
 				<SecundaryButton
 					text={"Cancelar"}
 					action={() => console.log("SecundaryButton")}
+				/>
+				<CheckBox
+					text="Lembrar senha"
+					state={rememberPassword}
+					action={() => setRememberPassword(!rememberPassword)}
 				/>
 			</View>
 		</View>
