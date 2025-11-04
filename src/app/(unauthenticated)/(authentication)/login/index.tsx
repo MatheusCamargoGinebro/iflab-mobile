@@ -8,6 +8,8 @@ import {
 	SecundaryButton,
 	CheckBox,
 } from "../../../../components/buttons";
+import { login_user } from "../../../../api/requests";
+import { Loading } from "../../../../components/loading";
 
 const AsyncStorage =
 	require("@react-native-async-storage/async-storage").default;
@@ -17,14 +19,24 @@ export default function () {
 	const router = useRouter();
 	/*----------------------------------------------------*/
 
-	const [userData, setUserData] = useState({
+	/* const [userData, setUserData] = useState({
 		user_email: "",
 		user_password: "",
+	}); */
+
+	/* const [checkData, setCheckData] = useState({
+		user_email: false,
+		user_password: false,
+	}); */
+
+	const [userData, setUserData] = useState({
+		user_email: "daniel.rocha@ifsp.edu.br",
+		user_password: "M4th3us@12345",
 	});
 
 	const [checkData, setCheckData] = useState({
-		user_email: false,
-		user_password: false,
+		user_email: true,
+		user_password: true,
 	});
 
 	const errorMessage = {
@@ -63,9 +75,29 @@ export default function () {
 		);
 	}
 
+	async function handleLogin() {
+		setLoading(true);
+		if (checkData.user_email === false || checkData.user_password === false) {
+			return;
+		}
+
+		const result = await login_user(
+			userData.user_email,
+			userData.user_password
+		);
+
+		console.log(result);
+
+		if (result.status) {
+			router.navigate("/home");
+		}
+		setLoading(false);
+	}
+
 	/*----------------------------------------------------*/
 
 	const [saveLogin, setSaveLogin] = useState(false);
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		async function fetchParams() {
@@ -78,7 +110,11 @@ export default function () {
 
 	/*----------------------------------------------------*/
 
-	return (
+	return loading ? (
+		<View className="flex-1 mt-44">
+			<Loading status_msg="Carregando" />
+		</View>
+	) : (
 		<View className="flex-1">
 			<Text className="ml-4">Digite suas informações</Text>
 			<View className="flex-col gap-14 px-4">
@@ -119,8 +155,10 @@ export default function () {
 			<View className="flex-1 px-10 justify-end pb-20">
 				<PrimaryButton
 					text="Logar"
-					action={() => {}}
-					disabled={!checkData.user_email || !checkData.user_password}
+					action={handleLogin}
+					disabled={
+						!checkData.user_email || !checkData.user_password || loading
+					}
 				/>
 				<View className="flex-row justify-center items-center gap-1">
 					<Text>Não possui conta?</Text>

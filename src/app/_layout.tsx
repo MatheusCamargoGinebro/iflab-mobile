@@ -4,7 +4,8 @@ import "../styles/global.css";
 
 import { get_user_info, login_user } from "../api/requests";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import LoadingScreen from "./loading";
+import { Loading } from "../components/loading/";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import {
 	configureReanimatedLogger,
@@ -22,12 +23,12 @@ export default function RootLayout() {
 
 	useEffect(() => {
 		async function fetch_data() {
-			await AsyncStorage.multiRemove([
+			/* await AsyncStorage.multiRemove([
 				"user_email",
 				"user_password",
 				"token",
 				"remember_login",
-			]);
+			]); */
 			/* await AsyncStorage.setItem("user_email", "daniel.rocha@ifsp.edu.br");
 			await AsyncStorage.setItem("user_password", "M4th3us@12345");
 			await AsyncStorage.setItem("remember_login", "true"); */
@@ -78,7 +79,11 @@ export default function RootLayout() {
 	}, []);
 
 	if (isLoading) {
-		return <LoadingScreen status_msg="Carregando" />;
+		return (
+			<SafeAreaView className="flex-1 items-center justify-center">
+				<Loading status_msg="Carregando" />
+			</SafeAreaView>
+		);
 	}
 
 	return (

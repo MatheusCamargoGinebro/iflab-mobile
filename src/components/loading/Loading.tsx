@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { View, Animated, Easing, Platform } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { colors } from "../../styles/colors";
 
 function BanterLoader() {
@@ -150,13 +149,11 @@ interface LoadingProps {
 	status_msg: string;
 }
 
-export default function LoadingScreen({ status_msg }: LoadingProps) {
+export function Loading({ status_msg }: LoadingProps) {
 	return (
-		<SafeAreaView className="flex-1 bg-white_full justify-center items-center">
-			<View className="justify-center items-center">
-				<BanterLoader />
-				<AnimatedStatusText text={status_msg} />
-			</View>
-		</SafeAreaView>
+		<View className="justify-center items-center">
+			<BanterLoader />
+			<AnimatedStatusText text={status_msg} />
+		</View>
 	);
 }
