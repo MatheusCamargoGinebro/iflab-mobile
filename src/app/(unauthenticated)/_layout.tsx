@@ -26,8 +26,8 @@ export default function Layout() {
 			<View
 				className={`flex w-full items-center ${
 					isKeyboardVisible
-						? "h-[15%] justify-end mb-20"
-						: "h-[30%] justify-center"
+						? "h-[20%] justify-end mb-32"
+						: "h-[20%] justify-end mb-40"
 				}`}
 			>
 				<Logo />
