@@ -4,7 +4,7 @@ import "../styles/global.css";
 
 import { get_user_info, login_user } from "../api/requests";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Loading } from "../components/loading/";
+import { Loading } from "../components/loadings";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import {

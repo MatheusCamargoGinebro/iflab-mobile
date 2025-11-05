@@ -4,16 +4,16 @@ export default function Layout() {
 	return (
 		<Tabs initialRouteName="home/index">
 			<Tabs.Screen
+				name="home/index"
+				options={{ title: "home", headerShown: false }}
+			/>
+			<Tabs.Screen
 				name="(my-sessions)"
 				options={{ title: "my-sessions", headerShown: false }}
 			/>
 			<Tabs.Screen
-				name="home"
-				options={{ title: "home/index", headerShown: false }}
-			/>
-			<Tabs.Screen
-				name="profile"
-				options={{ title: "profile/index", headerShown: false }}
+				name="profile/index"
+				options={{ title: "profile", headerShown: false }}
 			/>
 		</Tabs>
 	);

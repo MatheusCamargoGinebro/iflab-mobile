@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { useRouter } from "expo-router";
 
 import { UnderlineInput } from "../../../../components/inputs";
@@ -9,106 +9,113 @@ import {
 	CheckBox,
 } from "../../../../components/buttons";
 import { login_user } from "../../../../api/requests";
-import { Loading } from "../../../../components/loading";
+import { Loading } from "../../../../components/loadings";
 
-const AsyncStorage =
-	require("@react-native-async-storage/async-storage").default;
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const email_icon = require("../../../../../assets/UI/email.png");
 
-export default function () {
+function isValidEmail(email: string): boolean {
+	return /^[a-zA-Z0-9._-]+@(aluno\.ifsp\.edu\.br|ifsp\.edu\.br)$/.test(email);
+}
+
+function isValidPassword(password: string): boolean {
+	return password.length > 0;
+}
+
+const initialState = {
+	user_email: "",
+	user_password: "",
+	isValidEmail: false,
+	isValidPassword: false,
+};
+
+function reducer(state: any, action: any) {
+	switch (action.type) {
+		case "SET_EMAIL":
+			return {
+				...state,
+				user_email: action.payload,
+				isValidEmail: isValidEmail(action.payload),
+			};
+		case "SET_PASSWORD":
+			return {
+				...state,
+				user_password: action.payload,
+				isValidPassword: isValidPassword(action.payload),
+			};
+		default:
+			return state;
+	}
+}
+
+export default function LoginScreen() {
 	const router = useRouter();
-	/*----------------------------------------------------*/
-
-	/* const [userData, setUserData] = useState({
-		user_email: "",
-		user_password: "",
-	}); */
-
-	/* const [checkData, setCheckData] = useState({
-		user_email: false,
-		user_password: false,
-	}); */
-
-	const [userData, setUserData] = useState({
-		user_email: "daniel.rocha@ifsp.edu.br",
-		user_password: "M4th3us@12345",
-	});
-
-	const [checkData, setCheckData] = useState({
-		user_email: true,
-		user_password: true,
-	});
+	const [state, dispatch] = useReducer(reducer, initialState);
+	const [saveLogin, setSaveLogin] = useState(false);
+	const [loading, setLoading] = useState(false);
 
 	const errorMessage = {
 		user_email: "Insira um email válido",
-		user_password: "insira uma senha válida",
+		user_password: "Insira uma senha válida",
 	};
-
-	function handleMailType(e: string) {
-		if (
-			!/^[a-zA-Z0-9._-]+@aluno\.ifsp\.edu\.br$/.test(e) &&
-			!/^[a-zA-Z0-9._-]+@ifsp\.edu\.br$/.test(e)
-		) {
-			setCheckData({ ...checkData, user_email: false });
-		} else {
-			setCheckData({ ...checkData, user_email: true });
-		}
-
-		setUserData({ ...userData, user_email: e });
-	}
-
-	function handlePasswordType(e: string) {
-		setUserData({ ...userData, user_password: e });
-
-		if (e.length <= 0) {
-			setCheckData({ ...checkData, user_password: false });
-		} else {
-			setCheckData({ ...checkData, user_password: true });
-		}
-	}
-
-	async function handleRememberLogin() {
-		setSaveLogin(!saveLogin);
-		await AsyncStorage.setItem(
-			"remember_login",
-			saveLogin === true ? "true" : "false"
-		);
-	}
-
-	async function handleLogin() {
-		setLoading(true);
-		if (checkData.user_email === false || checkData.user_password === false) {
-			return;
-		}
-
-		const result = await login_user(
-			userData.user_email,
-			userData.user_password
-		);
-
-		console.log(result);
-
-		if (result.status) {
-			router.navigate("/home");
-		}
-		setLoading(false);
-	}
-
-	/*----------------------------------------------------*/
-
-	const [saveLogin, setSaveLogin] = useState(false);
-	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		async function fetchParams() {
 			const remember_login_value = await AsyncStorage.getItem("remember_login");
 			setSaveLogin(remember_login_value === "true");
-		}
 
+			if (!remember_login_value) {
+				return;
+			}
+
+			const mail = await AsyncStorage.getItem("user_email");
+			const password = await AsyncStorage.getItem("user_password");
+
+			if (!mail && !password) {
+				return;
+			}
+
+			dispatch({ type: "SET_EMAIL", payload: mail });
+			dispatch({ type: "SET_PASSWORD", payload: password });
+
+			return;
+		}
 		fetchParams();
 	}, []);
 
-	/*----------------------------------------------------*/
+	const handleMailType = (email: string) => {
+		dispatch({ type: "SET_EMAIL", payload: email });
+	};
+
+	const handlePasswordType = (password: string) => {
+		dispatch({ type: "SET_PASSWORD", payload: password });
+	};
+
+	const handleRememberLogin = async () => {
+		const newState = !saveLogin;
+		setSaveLogin(newState);
+		await AsyncStorage.setItem("remember_login", newState ? "true" : "false");
+	};
+
+	const handleLogin = async () => {
+		if (!state.isValidEmail || !state.isValidPassword) return;
+
+		setLoading(true);
+		const result = await login_user(state.user_email, state.user_password);
+
+		if (saveLogin) {
+			await AsyncStorage.setItem("user_email", state.user_email);
+			await AsyncStorage.setItem("user_password", state.user_password);
+		}
+
+		setLoading(false);
+		if (result.status) {
+			router.navigate("/home");
+		}
+	};
+
+	const goToForgotPassword = () => router.navigate("/forgot-password");
+	const goToRegister = () => router.navigate("/(email-verification)/send-mail");
 
 	return loading ? (
 		<View className="flex-1 mt-44">
@@ -118,23 +125,23 @@ export default function () {
 		<View className="flex-1">
 			<Text className="ml-4">Digite suas informações</Text>
 			<View className="flex-col gap-14 px-4">
-				<View className="">
+				<View>
 					<UnderlineInput
-						value={userData.user_email}
-						placeholder={"Email"}
+						value={state.user_email}
+						placeholder="Email"
 						errorMessage={errorMessage.user_email}
-						isValid={checkData.user_email}
+						isValid={state.isValidEmail}
 						icon={email_icon}
 						type="email-address"
 						action={handleMailType}
 					/>
 				</View>
-				<View className="">
+				<View>
 					<UnderlineInput
-						value={userData.user_password}
-						placeholder={"Senha"}
+						value={state.user_password}
+						placeholder="Senha"
 						errorMessage={errorMessage.user_password}
-						isValid={checkData.user_password}
+						isValid={state.isValidPassword}
 						type="visible-password"
 						action={handlePasswordType}
 					/>
@@ -146,7 +153,7 @@ export default function () {
 						/>
 						<SecundaryButton
 							text="Esqueceu a senha?"
-							action={() => router.navigate("/forgot-password")}
+							action={goToForgotPassword}
 						/>
 					</View>
 				</View>
@@ -156,16 +163,11 @@ export default function () {
 				<PrimaryButton
 					text="Logar"
 					action={handleLogin}
-					disabled={
-						!checkData.user_email || !checkData.user_password || loading
-					}
+					disabled={!state.isValidEmail || !state.isValidPassword || loading}
 				/>
 				<View className="flex-row justify-center items-center gap-1">
 					<Text>Não possui conta?</Text>
-					<SecundaryButton
-						text={"Registre-se"}
-						action={() => router.navigate("/(email-verification)/send-mail")}
-					/>
+					<SecundaryButton text="Registre-se" action={goToRegister} />
 				</View>
 			</View>
 		</View>
